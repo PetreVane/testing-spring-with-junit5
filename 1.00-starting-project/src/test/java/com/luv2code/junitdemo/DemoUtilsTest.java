@@ -1,6 +1,10 @@
 package com.luv2code.junitdemo;
 
 import org.junit.jupiter.api.*;
+
+import java.time.Duration;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(DisplayNameGenerator.Simple.class)
@@ -61,7 +65,20 @@ class DemoUtilsTest {
         String actual = sut.getAcademyDuplicate();
 
         assertSame(expected, actual, "Should be the same");
-        assertNotSame(notExpected, actual, "Should not be the same");
+    }
+
+    @Test
+    @DisplayName("Array equals")
+    void testArrayEquals() {
+        String[] expected = {"A", "B", "C"};
+        assertArrayEquals(expected, sut.getFirstThreeLettersOfAlphabet(), "Should be the same");
+    }
+
+    @Test
+    @DisplayName("List equals")
+    void testIterableEquals() {
+        var expected = List.of("luv", "2", "code");
+        assertIterableEquals(expected, sut.getAcademyInList(), "Should be the same");
     }
 
 
@@ -77,11 +94,17 @@ class DemoUtilsTest {
     }
 
     @Test
+    @DisplayName("Test if Exception is thrown")
     void throwException() {
+        assertThrows(Exception.class, () -> sut.throwException(-1), "Should throw");
+        assertDoesNotThrow(() ->  sut.throwException(1), "Should not throw");
     }
 
     @Test
+    @DisplayName("Test if method resumes execution after timeout expires")
     void checkTimeout() {
+        assertTimeoutPreemptively(Duration.ofSeconds(3), () -> sut.checkTimeout(),
+                "Should resume after 2 seconds");
     }
 
     @AfterAll
