@@ -7,7 +7,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayNameGeneration(DisplayNameGenerator.Simple.class)
+@DisplayNameGeneration(DisplayNameGenerator.Simple.class) // Responsible with the generation of test names (optional to @DisplayName)
+@TestMethodOrder(MethodOrderer.Random.class) // Responsible with the order of test execution
 class DemoUtilsTest {
 
     DemoUtils sut;
@@ -29,6 +30,7 @@ class DemoUtilsTest {
     }
 
     @Test
+    @Order(-1) //you can also declare your custom order; the lowest value has the highest priority --> will be executed first
     void add() {
         System.out.println("This is the 'add()' test method");
         // arrange
@@ -44,6 +46,7 @@ class DemoUtilsTest {
 
 
     @Test
+    @Order(2)
     void checkNull() {
         System.out.println("This is the 'checkNull()' test method");
         // arrange
@@ -59,9 +62,7 @@ class DemoUtilsTest {
     @Test
     @DisplayName("Checks if string is the same")
     void isSame() {
-
         String expected = sut.getAcademy();
-        var notExpected = sut.getFirstThreeLettersOfAlphabet();
         String actual = sut.getAcademyDuplicate();
 
         assertSame(expected, actual, "Should be the same");
@@ -85,6 +86,10 @@ class DemoUtilsTest {
     @Test
     @DisplayName("This is the multiply method")
     void multiply() {
+        int expected = 15;
+        int actual = sut.multiply(5, 3);
+        assertEquals(expected, actual, "5 * 3 should equal 15");
+        assertNotEquals(24, actual, "Should not equal 25");
     }
 
 
