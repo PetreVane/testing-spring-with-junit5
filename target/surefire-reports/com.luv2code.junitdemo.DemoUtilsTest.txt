@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.luv2code.junitdemo.DemoUtilsTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.071 s <<< FAILURE! - in com.luv2code.junitdemo.DemoUtilsTest
+add  Time elapsed: 0.02 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 2 + 4 should = 6 ==> expected: <6> but was: <10>
+	at com.luv2code.junitdemo.DemoUtilsTest.add(DemoUtilsTest.java:43)
+
